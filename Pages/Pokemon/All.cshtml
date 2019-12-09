@@ -4,5 +4,9 @@
     ViewData["Title"] = "All";
 }
 
-<h1>All</h1>
+<h1>All Pokemon</h1>
 
+@foreach (var result in Model.Pokemon.results)
+{
+    <p>@result.name</p>
+}
