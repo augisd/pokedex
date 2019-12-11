@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Pokedex.Repositories;
 
 namespace Pokedex
 {
@@ -24,6 +25,7 @@ namespace Pokedex
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient();
+            services.AddScoped<IPokemonRepository, PokemonRepository>();
             services.AddRazorPages();
         }
 

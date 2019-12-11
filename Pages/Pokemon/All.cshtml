@@ -6,7 +6,13 @@
 
 <h1>All Pokemon</h1>
 
-@foreach (var result in Model.Pokemon.results)
-{
-    <p>@result.name</p>
-}
+<table class="table table-active">
+
+    @foreach (var result in Model.Pokemon)
+    {
+        <tr>
+            <td><img src="@result.sprites.front_default"/></td>
+            <td><a href="#">@result.name</a></td>
+        </tr>
+    }
+</table>

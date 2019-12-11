@@ -1,29 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Newtonsoft.Json;
-using Pokedex.Objects;
 using Pokedex.Repositories;
+using Pokedex.Objects;
 
 namespace Pokedex.Pages.Pokemon
 {
-    public class AllModel : PageModel
+    public class DetailsModel : PageModel
     {
         private readonly IPokemonRepository _pokemonRepository;
+        public Objects.PokemonDto Details { get; set; }
 
-        public IEnumerable<PokemonDto> Pokemon { get; set; }
-
-        public AllModel(IPokemonRepository pokemonRepository)
+        public DetailsModel(IPokemonRepository pokemonRepository)
         {
             _pokemonRepository = pokemonRepository;
         }
         public async Task OnGetAsync()
         {
-            Pokemon = await _pokemonRepository.GetPokemonList();
+            Details = await _pokemonRepository.GetPokemonDetails("ivysaur");
         }
     }
 }
