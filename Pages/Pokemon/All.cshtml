@@ -8,11 +8,8 @@
 
 <table class="table table-active">
 
-    @foreach (var result in Model.Pokemon)
+    @foreach (var pokemon in Model.Pokemon)
     {
-        <tr>
-            <td><img src="@result.sprites.front_default"/></td>
-            <td><a asp-page="./Details" asp-route-id="@result.id">@result.name</a></td>
-        </tr>
+        <partial name="_PokemonCard" model="pokemon" />
     }
 </table>

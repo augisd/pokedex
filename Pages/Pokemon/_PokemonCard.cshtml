@@ -1,0 +1,11 @@
+﻿@using Pokedex.Objects;
+@model PokemonDto
+
+<div class="card" style="width: 10rem;text-align:center;margin:auto;display:inline-block;margin:1em;">
+    <img class="card-img-top" 
+         src="@Model.sprites.front_default" 
+         style="width:75%;height:75%"/>
+    <div class="card-body">
+        <h5 class="card-title">@Model.name</h5>
+    </div>
+</div>

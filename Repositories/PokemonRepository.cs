@@ -88,9 +88,9 @@ namespace Pokedex.Repositories
             return new PokemonDto();
         }
 
-        public async Task<IEnumerable<PokemonDto>> GetPokemonList()
+        public async Task<IEnumerable<PokemonDto>> GetPokemonList(int offset = 0, int limit = 20)
         {
-            var route = "/api/v2/pokemon/";
+            var route = $"/api/v2/pokemon?offset={offset}&limit={limit}";
             List<PokemonDto> pokemonList = new List<PokemonDto>();
             requestUrl = host + route;
             try

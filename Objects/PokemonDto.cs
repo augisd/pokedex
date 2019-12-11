@@ -11,9 +11,20 @@ namespace Pokedex.Objects
         public int base_experience { get; set; }
         public int height { get; set; }
         public int id { get; set; }
-        public string name { get; set; }
+        private string _name;
+        public string name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value.First().ToString().ToUpper() + value.Substring(1);
+            }
+        }
         public Sprite sprites { get; set; }
         public List<PokemonType> types { get; set; }
-        public int weight { get; set; }        
+        public int weight { get; set; }
     }
 }
