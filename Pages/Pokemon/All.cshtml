@@ -12,7 +12,7 @@
     {
         <tr>
             <td><img src="@result.sprites.front_default"/></td>
-            <td><a href="#">@result.name</a></td>
+            <td><a asp-page="./Details" asp-route-id="@result.id">@result.name</a></td>
         </tr>
     }
 </table>

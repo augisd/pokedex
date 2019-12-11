@@ -12,15 +12,15 @@ namespace Pokedex.Pages.Pokemon
     public class DetailsModel : PageModel
     {
         private readonly IPokemonRepository _pokemonRepository;
-        public Objects.PokemonDto Details { get; set; }
+        public PokemonDto Details { get; set; }
 
         public DetailsModel(IPokemonRepository pokemonRepository)
         {
             _pokemonRepository = pokemonRepository;
         }
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int id)
         {
-            Details = await _pokemonRepository.GetPokemonDetails("ivysaur");
+            Details = await _pokemonRepository.GetPokemonDetails(id);
         }
     }
 }

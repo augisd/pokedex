@@ -91,30 +91,5 @@ namespace Pokedex.Repositories
 
             return new List<PokemonDto>();
         }
-
-        public async Task<RootObject> GetPokemonList1()
-        {
-            var route = "/api/v2/pokemon/";
-            requestUrl = host + route;
-            try
-            {
-                var request = new HttpRequestMessage(HttpMethod.Get, requestUrl);              
-                var response = await client.SendAsync(request);
-                var responseString = await response.Content.ReadAsStringAsync();
-                var rootObject = JsonConvert.DeserializeObject<RootObject>(responseString);
-                return rootObject;
-            }
-            catch (HttpRequestException e)
-            {
-                Console.WriteLine($"Message: {e.Message}");
-            }
-
-            return new RootObject();
-        }
-
-        public Task<Sprite> GetPokemonSprites()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
