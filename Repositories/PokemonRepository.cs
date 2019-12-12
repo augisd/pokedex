@@ -16,6 +16,7 @@ namespace Pokedex.Repositories
         private readonly string host;
         private string requestUrl;
         private HttpClient client;
+        private int pokemonCount;
 
         public PokemonRepository(IHttpClientFactory clientFactory, IMemoryCache cache)
         {
@@ -24,6 +25,12 @@ namespace Pokedex.Repositories
             host = "https://pokeapi.co";
             client = _clientFactory.CreateClient();
         }
+
+        public int GetPokemonCount()
+        {
+            return pokemonCount;
+        }
+
         public async Task<PokemonDto> GetPokemonDetails(int id)
         {
             var route = $"/api/v2/pokemon/{id}";
@@ -74,7 +81,7 @@ namespace Pokedex.Repositories
                 var response = await client.SendAsync(request);
                 var responseString = await response.Content.ReadAsStringAsync();
                 var pokemonObject = JsonConvert.DeserializeObject<PokemonDto>(responseString);
-
+                
                 // add to cache
                 _cache.Set(name, pokemonObject);
 
@@ -99,7 +106,7 @@ namespace Pokedex.Repositories
                 var response = await client.SendAsync(request);
                 var responseString = await response.Content.ReadAsStringAsync();
                 var rootObject = JsonConvert.DeserializeObject<RootObject>(responseString);
-                
+                pokemonCount = rootObject.count;
                 foreach (var pokemon in rootObject.results)
                 {
                     string name = pokemon.name;

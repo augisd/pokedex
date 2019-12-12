@@ -1,4 +1,4 @@
-﻿@page
+﻿@page 
 @model Pokedex.Pages.Pokemon.AllModel
 @{
     ViewData["Title"] = "All";
@@ -13,3 +13,88 @@
         <partial name="_PokemonCard" model="pokemon" />
     }
 </table>
+
+<ul class="pagination">
+
+    @if (Model.pageNumber > 1)
+    {
+        <li class="page-item">
+            <a class="page-link" href="./All?pageNumber=1">
+                First
+            </a>
+        </li>
+
+        <li class="page-item">
+            <a class="page-link" href="./All?pageNumber=@(Model.pageNumber - 1)">
+                Previous
+            </a>
+        </li>
+    }
+    else
+    {
+        <li class="page-item disabled">
+            <span class="page-link">
+                First
+            </span>
+        </li>
+
+        <li class="page-item disabled">
+            <span class="page-link">
+                Previous
+            </span>
+        </li>
+    }
+
+    @for (int i = Model.pageNumber - 1; i <= Model.pageNumber + 1; i++)
+    {
+        if (i > 0 && i <= Model.numberOfPages)
+        {
+            if (i == Model.pageNumber)
+            {
+                <li class="page-item active">
+                    <a class="page-link" href="./All?pageNumber=@i">
+                        @i
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" href="./All?pageNumber=@i">
+                        @i
+                    </a>
+                </li>
+            }
+        }
+    }
+
+    @if (Model.pageNumber < Model.numberOfPages)
+    {
+        <li class="page-item">
+            <a class="page-link" href="./All?pageNumber=@(Model.pageNumber + 1)">
+                Next
+            </a>
+        </li>
+
+        <li class="page-item">
+            <a class="page-link" href="./All?pageNumber=@Model.numberOfPages">
+                Last
+            </a>
+        </li>
+    }
+    else
+    {
+        <li class="page-item disabled">
+            <span class="page-link">
+                Next
+            </span>
+        </li>
+
+        <li class="page-item disabled">
+            <span class="page-link">
+                Last
+            </span>
+        </li>
+    }
+
+</ul>

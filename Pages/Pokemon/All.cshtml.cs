@@ -16,12 +16,13 @@ namespace Pokedex.Pages.Pokemon
         private readonly IPokemonRepository _pokemonRepository;
 
         public IEnumerable<PokemonDto> Pokemon { get; set; }
-        
-        [BindProperty(SupportsGet = true)]
+        public int numberOfPages { get; set; }
+
+        [BindProperty(SupportsGet = true)]                       // 
         public int itemCount { get; set; } = 20;
 
         [BindProperty(SupportsGet = true)]
-        public int pageNo { get; set; } = 1;
+        public int pageNumber { get; set; } = 1;
 
         public AllModel(IPokemonRepository pokemonRepository)
         {
@@ -29,7 +30,8 @@ namespace Pokedex.Pages.Pokemon
         }
         public async Task OnGetAsync()
         {
-            Pokemon = await _pokemonRepository.GetPokemonList((pageNo - 1) * itemCount, itemCount);
+            Pokemon = await _pokemonRepository.GetPokemonList((pageNumber - 1) * itemCount, itemCount);
+            numberOfPages = Convert.ToInt32(Math.Ceiling((double)_pokemonRepository.GetPokemonCount() / itemCount));
         }
     }
 }
